@@ -10,7 +10,7 @@ using OsEngine.Charts.CandleChart.Elements;
 
 namespace OsEngine.Robots.TechSapmles
 {
-    [Bot("ElementsOnChartSampleBot")]
+   // [Bot("ElementsOnChartSampleBot")]
     public class ElementsOnChartSampleBot : BotPanel
     {
         public ElementsOnChartSampleBot(string name, StartProgram startProgram) : base(name, startProgram)

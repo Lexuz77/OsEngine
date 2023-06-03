@@ -109,18 +109,18 @@ namespace OsEngine.OsTrader.Gui
             ButtonSellLimit.Content = OsLocalization.Trader.Label33;
             ButtonCloseLimit.Content = OsLocalization.Trader.Label34;
             LabelGeneralSettings.Content = OsLocalization.Trader.Label35;
-            LabelBotControl.Content = OsLocalization.Trader.Label36;
+          //  LabelBotControl.Content = OsLocalization.Trader.Label36;
             ButtonServer.Content = OsLocalization.Trader.Label37;
             ButtonNewBot.Content = OsLocalization.Trader.Label38;
             ButtonDeleteBot.Content = OsLocalization.Trader.Label39;
             ButtonJournalCommunity.Content = OsLocalization.Trader.Label40;
-            ButtonRiskManagerCommunity.Content = OsLocalization.Trader.Label41;
+          //  ButtonRiskManagerCommunity.Content = OsLocalization.Trader.Label41;
             CheckBoxPaintOnOff.Content = OsLocalization.Trader.Label42;
             ButtonStrategSettingsIndividual.Content = OsLocalization.Trader.Label43;
             ButtonRedactTab.Content = OsLocalization.Trader.Label44;
             ButtonStrategParametr.Content = OsLocalization.Trader.Label45;
-            ButtonRiskManager.Content = OsLocalization.Trader.Label46;
-            ButtonStrategSettings.Content = OsLocalization.Trader.Label47;
+          //  ButtonRiskManager.Content = OsLocalization.Trader.Label46;
+          //  ButtonStrategSettings.Content = OsLocalization.Trader.Label47;
         }
 
         void RobotUi_Closing(object sender, System.ComponentModel.CancelEventArgs e)

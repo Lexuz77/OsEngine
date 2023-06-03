@@ -14,7 +14,7 @@ namespace OsEngine.Robots.AutoTestBots
     /// <summary>
     /// Робот созданный для тестирования синхронности массива трейдов в свече и самих свечек
     /// </summary>
-    [Bot("TestBotTradesInCandlesTest")]
+   // [Bot("TestBotTradesInCandlesTest")]
     public class TestBotTradesInCandlesTest : BotPanel
     {
         public TestBotTradesInCandlesTest(string name, StartProgram startProgram) : base(name, startProgram)

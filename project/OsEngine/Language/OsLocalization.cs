@@ -201,11 +201,11 @@ namespace OsEngine.Language
 
         public static MarketLocal Market = new MarketLocal();
 
-        public static ConverterLocal Converter = new ConverterLocal();
+        //public static ConverterLocal Converter = new ConverterLocal();
 
         public static DataLocal Data = new DataLocal();
 
-        public static MinerLocal Miner = new MinerLocal();
+        //public static MinerLocal Miner = new MinerLocal();
 
         public static OptimizerLocal Optimizer = new OptimizerLocal();
 

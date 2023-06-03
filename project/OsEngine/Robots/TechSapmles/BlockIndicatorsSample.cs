@@ -10,7 +10,7 @@ namespace OsEngine.Robots.TechSapmles
     // пример показывающий блокировку индикаторов для расчёта
     // пригодиться при оптимизации роботов, в которых нужны не все индикаторы
 
-    [Bot("BlockIndicatorsSample")]
+ //   [Bot("BlockIndicatorsSample")]
     public class BlockIndicatorsSample : BotPanel
     {
         public BlockIndicatorsSample(string name, StartProgram startProgram) : base(name, startProgram)

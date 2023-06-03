@@ -20,11 +20,8 @@ using OsEngine.Entity;
 using OsEngine.Language;
 using OsEngine.Market;
 using OsEngine.Market.Servers;
-using OsEngine.Market.Servers.Miner;
 using OsEngine.Market.Servers.Optimizer;
-using OsEngine.OsConverter;
 using OsEngine.OsData;
-using OsEngine.OsMiner;
 using OsEngine.OsOptimizer;
 using OsEngine.OsTrader;
 using OsEngine.OsTrader.Panels;
@@ -229,10 +226,10 @@ namespace OsEngine.Logging
                 _candleConverters[i].LogMessageEvent -= ProcessMessage;
             }
 
-            for (int i = 0; i < _osConverterMasters.Count; i++)
-            {
-                _osConverterMasters[i].LogMessageEvent -= ProcessMessage;
-            }
+            //for (int i = 0; i < _osConverterMasters.Count; i++)
+            //{
+            //    _osConverterMasters[i].LogMessageEvent -= ProcessMessage;
+            //}
 
             for (int i = 0; i < _osTraderMasters.Count; i++)
             {
@@ -249,10 +246,10 @@ namespace OsEngine.Logging
                 _optimizerDataStoreges[i].LogMessageEvent -= ProcessMessage;
             }
 
-            for (int i = 0; i < _osMinerMasters.Count; i++)
-            {
-                _osMinerMasters[i].LogMessageEvent -= ProcessMessage;
-            }
+            //for (int i = 0; i < _osMinerMasters.Count; i++)
+            //{
+            //    _osMinerMasters[i].LogMessageEvent -= ProcessMessage;
+            //}
 
             for (int i = 0; i < _osDataMasters.Count; i++)
             {
@@ -264,10 +261,10 @@ namespace OsEngine.Logging
                 _optimizers[i].LogMessageEvent -= ProcessMessage;
             }
 
-            for (int i = 0; i < _miners.Count; i++)
-            {
-                _miners[i].LogMessageEvent -= ProcessMessage;
-            }
+            //for (int i = 0; i < _miners.Count; i++)
+            //{
+            //    _miners[i].LogMessageEvent -= ProcessMessage;
+            //}
 
             for (int i = 0; i < _serversToListen.Count; i++)
             {
@@ -275,25 +272,25 @@ namespace OsEngine.Logging
             }
 
             _candleConverters.Clear();
-            _osConverterMasters.Clear();
+          //  _osConverterMasters.Clear();
             _osTraderMasters.Clear();
             _botPanels.Clear();
             _optimizerDataStoreges.Clear();
-            _osMinerMasters.Clear();
+           // _osMinerMasters.Clear();
             _osDataMasters.Clear();
             _optimizers.Clear();
-            _miners.Clear();
+           // _miners.Clear();
             _serversToListen.Clear();
 
             _candleConverters = null;
-            _osConverterMasters = null;
+           // _osConverterMasters = null;
             _osTraderMasters = null;
             _botPanels = null;
             _optimizerDataStoreges = null;
-            _osMinerMasters = null;
+           // _osMinerMasters = null;
             _osDataMasters = null;
             _optimizers = null;
-            _miners = null;
+           // _miners = null;
             _serversToListen = null;
         }
 
@@ -377,14 +374,14 @@ namespace OsEngine.Logging
         private CultureInfo _currentCulture;
 
         List<CandleConverter> _candleConverters = new List<CandleConverter>();
-        List<OsConverterMaster> _osConverterMasters = new List<OsConverterMaster>();
+      //  List<OsConverterMaster> _osConverterMasters = new List<OsConverterMaster>();
         List<OsTraderMaster> _osTraderMasters = new List<OsTraderMaster>();
         List<BotPanel> _botPanels = new List<BotPanel>();
         List<OptimizerDataStorage> _optimizerDataStoreges = new List<OptimizerDataStorage>();
-        List<OsMinerMaster> _osMinerMasters = new List<OsMinerMaster>();
+       // List<OsMinerMaster> _osMinerMasters = new List<OsMinerMaster>();
         List<OsDataMasterPainter> _osDataMasters = new List<OsDataMasterPainter>();
         List<OptimizerMaster> _optimizers = new List<OptimizerMaster>();
-        List<OsMinerServer> _miners = new List<OsMinerServer>();
+       // List<OsMinerServer> _miners = new List<OsMinerServer>();
         List<IServer> _serversToListen = new List<IServer>();
 
         /// <summary>
@@ -402,11 +399,11 @@ namespace OsEngine.Logging
         /// start listening to the Server Miner
         /// начать прослушку сервера майнера
         /// </summary>
-        public void Listen(OsMinerServer miner)
-        {
-            miner.LogMessageEvent += ProcessMessage;
-            _miners.Add(miner);
-        }
+        //public void Listen(OsMinerServer miner)
+        //{
+        //    miner.LogMessageEvent += ProcessMessage;
+        //    _miners.Add(miner);
+        //}
 
         /// <summary>
         /// start listening to the Optimizer
@@ -435,11 +432,11 @@ namespace OsEngine.Logging
         /// начать прослушку OsData
         /// </summary>
         /// <param name="master"></param>
-        public void Listen(OsMinerMaster master)
-        {
-            master.LogMessageEvent += ProcessMessage;
-            _osMinerMasters.Add(master);
-        }
+        //public void Listen(OsMinerMaster master)
+        //{
+        //    master.LogMessageEvent += ProcessMessage;
+        //    _osMinerMasters.Add(master);
+        //}
 
         /// <summary>
         /// start listening to the Optimizer storage
@@ -475,11 +472,11 @@ namespace OsEngine.Logging
         /// start listening to the bot storage
         /// начать прослушку хранилища роботов
         /// </summary>
-        public void Listen(OsConverterMaster master)
-        {
-            master.LogMessageEvent += ProcessMessage;
-            _osConverterMasters.Add(master);
-        }
+        //public void Listen(OsConverterMaster master)
+        //{
+        //    master.LogMessageEvent += ProcessMessage;
+        //    _osConverterMasters.Add(master);
+        //}
 
         public void Listen(CandleConverter master)
         {

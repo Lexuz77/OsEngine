@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using OsEngine.Entity;
 using OsEngine.Logging;
 using OsEngine.Market.Servers.Entity;
-using ru.micexrts.cgate;
 using Trade = OsEngine.Entity.Trade;
 
 namespace OsEngine.Market.Servers

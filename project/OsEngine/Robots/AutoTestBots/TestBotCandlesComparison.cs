@@ -19,7 +19,7 @@ namespace OsEngine.Robots.AutoTestBots
     /// <summary>
     /// Робот созданный для тестирования синхронности свечек созданных внутри OsEngine и запрошенных с биржи
     /// </summary>
-    [Bot("TestBotCandlesComparison")]
+    //[Bot("TestBotCandlesComparison")]
     public class TestBotCandlesComparison : BotPanel
     {
         public TestBotCandlesComparison(string name, StartProgram startProgram) : base(name, startProgram)

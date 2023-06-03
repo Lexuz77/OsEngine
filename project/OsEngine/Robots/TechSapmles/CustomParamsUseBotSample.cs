@@ -11,7 +11,7 @@ using System;
 
 namespace OsEngine.Robots.TechSapmles
 {
-    [Bot("CustomParamsUseBotSample")]
+   // [Bot("CustomParamsUseBotSample")]
     public class CustomParamsUseBotSample : BotPanel
     {
         public CustomParamsUseBotSample(string name, StartProgram startProgram) : base(name, startProgram)

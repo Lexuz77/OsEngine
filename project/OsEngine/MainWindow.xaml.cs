@@ -16,9 +16,9 @@ using Microsoft.Win32;
 using OsEngine.Alerts;
 using OsEngine.Language;
 using OsEngine.Market;
-using OsEngine.OsConverter;
+
 using OsEngine.OsData;
-using OsEngine.OsMiner;
+
 using OsEngine.OsOptimizer;
 using OsEngine.OsTrader.Gui;
 using OsEngine.PrimeSettings;
@@ -118,13 +118,13 @@ namespace OsEngine
             BlockTestingLabel.Content = OsLocalization.MainWindow.BlockTestingLabel;
             BlockTradingLabel.Content = OsLocalization.MainWindow.BlockTradingLabel;
             ButtonData.Content = OsLocalization.MainWindow.OsDataName;
-            ButtonConverter.Content = OsLocalization.MainWindow.OsConverter;
+           // ButtonConverter.Content = OsLocalization.MainWindow.OsConverter;
             ButtonTester.Content = OsLocalization.MainWindow.OsTesterName;
             ButtonOptimizer.Content = OsLocalization.MainWindow.OsOptimizerName;
-            ButtonMiner.Content = OsLocalization.MainWindow.OsMinerName;
+          //  ButtonMiner.Content = OsLocalization.MainWindow.OsMinerName;
 
             ButtonRobot.Content = OsLocalization.MainWindow.OsBotStationName;
-            ButtonCandleConverter.Content = OsLocalization.MainWindow.OsCandleConverter;
+           // ButtonCandleConverter.Content = OsLocalization.MainWindow.OsCandleConverter;
 
             ButtonTesterLight.Content = OsLocalization.MainWindow.OsTesterLightName;
             ButtonRobotLight.Content = OsLocalization.MainWindow.OsBotStationLightName;
@@ -332,23 +332,23 @@ namespace OsEngine
             Process.GetCurrentProcess().Kill();
         }
 
-        private void ButtonConverter_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Hide();
-                OsConverterUi ui = new OsConverterUi();
-                ui.ShowDialog();
-                Close();
-                ProccesIsWorked = false;
-                Thread.Sleep(10000);
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show(error.ToString());
-            }
-            Process.GetCurrentProcess().Kill();
-        }
+        //private void ButtonConverter_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        Hide();
+        //        OsConverterUi ui = new OsConverterUi();
+        //        ui.ShowDialog();
+        //        Close();
+        //        ProccesIsWorked = false;
+        //        Thread.Sleep(10000);
+        //    }
+        //    catch (Exception error)
+        //    {
+        //        MessageBox.Show(error.ToString());
+        //    }
+        //    Process.GetCurrentProcess().Kill();
+        //}
 
         private void ButtonOptimizer_Click(object sender, RoutedEventArgs e)
         {
@@ -368,23 +368,23 @@ namespace OsEngine
             Process.GetCurrentProcess().Kill();
         }
 
-        private void ButtonMiner_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Hide();
-                OsMinerUi ui = new OsMinerUi();
-                ui.ShowDialog();
-                Close();
-                ProccesIsWorked = false;
-                Thread.Sleep(10000);
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show(error.ToString());
-            }
-            Process.GetCurrentProcess().Kill();
-        }
+        //private void ButtonMiner_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        Hide();
+        //        OsMinerUi ui = new OsMinerUi();
+        //        ui.ShowDialog();
+        //        Close();
+        //        ProccesIsWorked = false;
+        //        Thread.Sleep(10000);
+        //    }
+        //    catch (Exception error)
+        //    {
+        //        MessageBox.Show(error.ToString());
+        //    }
+        //    Process.GetCurrentProcess().Kill();
+        //}
 
         private async void ThreadAreaGreeting()
         {
@@ -438,23 +438,23 @@ namespace OsEngine
 
         private PrimeSettingsMasterUi _settingsUi;
 
-        private void CandleConverter_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Hide();
-                OsCandleConverterUi ui = new OsCandleConverterUi();
-                ui.ShowDialog();
-                Close();
-                ProccesIsWorked = false;
-                Thread.Sleep(10000);
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show(error.ToString());
-            }
-            Process.GetCurrentProcess().Kill();
-        }
+        //private void CandleConverter_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        Hide();
+        //        OsCandleConverterUi ui = new OsCandleConverterUi();
+        //        ui.ShowDialog();
+        //        Close();
+        //        ProccesIsWorked = false;
+        //        Thread.Sleep(10000);
+        //    }
+        //    catch (Exception error)
+        //    {
+        //        MessageBox.Show(error.ToString());
+        //    }
+        //    Process.GetCurrentProcess().Kill();
+        //}
 
         private void CommandLineInterfaceProcess()
         {

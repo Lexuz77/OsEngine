@@ -12,7 +12,7 @@ using System.Windows.Media;
 
 namespace OsEngine.Robots.AutoTestBots
 {
-    [Bot("TestBotConnection")]
+   // [Bot("TestBotConnection")]
     public class TestBotConnection : BotPanel
     {
         private BotTabScreener _screener;

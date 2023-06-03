@@ -13,26 +13,11 @@ using OsEngine.Market.Servers;
 using OsEngine.Market.Servers.Binance;
 using OsEngine.Market.Servers.Binance.Futures;
 using OsEngine.Market.Servers.Binance.Spot;
-using OsEngine.Market.Servers.Bitfinex;
-using OsEngine.Market.Servers.BitMax;
-using OsEngine.Market.Servers.BitMex;
 using OsEngine.Market.Servers.GateIo;
-using OsEngine.Market.Servers.Kraken;
-using OsEngine.Market.Servers.QuikLua;
-using OsEngine.Market.Servers.SmartCom;
 using OsEngine.Market.Servers.Tester;
-using OsEngine.Market.Servers.Transaq;
-using OsEngine.Market.Servers.ZB;
-using OsEngine.Market.Servers.Hitbtc;
-using OsEngine.Market.Servers.Huobi.Futures;
-using OsEngine.Market.Servers.Huobi.FuturesSwap;
-using OsEngine.Market.Servers.Huobi.Spot;
-using OsEngine.Market.Servers.Tinkoff;
 using OsEngine.Market.Servers.GateIo.Futures;
 using OsEngine.Market.Servers.Bybit;
-using OsEngine.Market.Servers.InteractiveBrokers;
 using OsEngine.Market.Servers.OKX;
-using OsEngine.Market.Servers.BitMaxFutures;
 using OsEngine.Market.Servers.BybitSpot;
 using OsEngine.Market.Servers.BitGet.BitGetSpot;
 using OsEngine.Market.Servers.BitGet.BitGetFutures;
@@ -342,72 +327,72 @@ namespace OsEngine.Entity
                             series.IsStarted = true;
                         }
 
-                        else if (serverType == ServerType.Plaza ||
-                                 serverType == ServerType.QuikDde ||
-                                 serverType == ServerType.AstsBridge ||
-                                 serverType == ServerType.NinjaTrader ||
-                                 serverType == ServerType.Lmax)
-                        {
-                            series.CandlesAll = null;
-                            // further, we try to load candles with ticks
-                            // далее, пытаемся пробуем прогрузить свечи при помощи тиков
-                            List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //else if (serverType == ServerType.Plaza ||
+                        //         serverType == ServerType.QuikDde ||
+                        //         serverType == ServerType.AstsBridge ||
+                        //         serverType == ServerType.NinjaTrader ||
+                        //         serverType == ServerType.Lmax)
+                        //{
+                        //    series.CandlesAll = null;
+                        //    // further, we try to load candles with ticks
+                        //    // далее, пытаемся пробуем прогрузить свечи при помощи тиков
+                        //    List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
 
-                            series.PreLoad(allTrades);
-                            // if there is a preloading of candles on the server and something is downloaded
-                            // если на сервере есть предзагрузка свечек и что-то скачалось 
-                            series.UpdateAllCandles();
+                        //    series.PreLoad(allTrades);
+                        //    // if there is a preloading of candles on the server and something is downloaded
+                        //    // если на сервере есть предзагрузка свечек и что-то скачалось 
+                        //    series.UpdateAllCandles();
 
-                            series.IsStarted = true;
-                        }
-                        else if (serverType == ServerType.SmartCom)
-                        {
-                            SmartComServer smart = (SmartComServer) _server;
+                        //    series.IsStarted = true;
+                        //}
+                        //else if (serverType == ServerType.SmartCom)
+                        //{
+                        //    SmartComServer smart = (SmartComServer) _server;
 
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
 
-                                series.PreLoad(allTrades);
-                            }
-                            else
-                            {
-                                List<Candle> candles = smart.GetSmartComCandleHistory(series.Security.Name,
-                                    series.TimeFrameSpan, 170);
-                                if (candles != null)
-                                {
-                                    candles.Reverse();
-                                    series.CandlesAll = candles;
-                                }
-                            }
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
-                        else if (serverType == ServerType.Tinkoff)
-                        {
-                            TinkoffServer tinkoff = (TinkoffServer)_server;
+                        //        series.PreLoad(allTrades);
+                        //    }
+                        //    else
+                        //    {
+                        //        List<Candle> candles = smart.GetSmartComCandleHistory(series.Security.Name,
+                        //            series.TimeFrameSpan, 170);
+                        //        if (candles != null)
+                        //        {
+                        //            candles.Reverse();
+                        //            series.CandlesAll = candles;
+                        //        }
+                        //    }
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
+                        //else if (serverType == ServerType.Tinkoff)
+                        //{
+                        //    TinkoffServer tinkoff = (TinkoffServer)_server;
 
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
 
-                                series.PreLoad(allTrades);
-                            }
-                            else
-                            {
-                                List<Candle> candles = tinkoff.GetCandleHistory(series.Security.NameId,
-                                    series.TimeFrame);
+                        //        series.PreLoad(allTrades);
+                        //    }
+                        //    else
+                        //    {
+                        //        List<Candle> candles = tinkoff.GetCandleHistory(series.Security.NameId,
+                        //            series.TimeFrame);
 
-                                if (candles != null)
-                                {
-                                    series.CandlesAll = candles;
-                                }
-                            }
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
+                        //        if (candles != null)
+                        //        {
+                        //            series.CandlesAll = candles;
+                        //        }
+                        //    }
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
                         else if (serverType == ServerType.Tester ||
                                  serverType == ServerType.Optimizer ||
                                  serverType == ServerType.BitStamp
@@ -415,74 +400,74 @@ namespace OsEngine.Entity
                         {
                             series.IsStarted = true;
                         }
-                        else if (serverType == ServerType.QuikLua)
-                        {
-                            QuikLuaServer luaServ = (QuikLuaServer)_server;
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple || 
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = luaServ.GetQuikLuaTickHistory(series.Security);
-                                if (allTrades != null && allTrades.Count != 0)
-                                {
-                                    series.PreLoad(allTrades);
-                                }
-                            }
-                            else
-                            {
-                                List<Candle> candles = luaServ.GetQuikLuaCandleHistory(series.Security,
-                                    series.TimeFrameSpan);
-                                if (candles != null)
-                                {
-                                    //candles.Reverse();
-                                    series.CandlesAll = candles;
-                                }
-                            }
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
-                        else if (serverType == ServerType.BitMex)
-                        {
-                            BitMexServer bitMex = (BitMexServer)_server;
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple || 
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
-                                series.PreLoad(allTrades);
-                            }
-                            else
-                            {
-                                List<Candle> candles = bitMex.GetBitMexCandleHistory(series.Security.Name,
-                                    series.TimeFrameSpan);
-                                if (candles != null)
-                                {
-                                    series.CandlesAll = candles;
-                                }
-                            }
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
-                        else if (serverType == ServerType.Kraken)
-                        {
-                            KrakenServer kraken = (KrakenServer)_server;
+                        //else if (serverType == ServerType.QuikLua)
+                        //{
+                        //    QuikLuaServer luaServ = (QuikLuaServer)_server;
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple || 
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = luaServ.GetQuikLuaTickHistory(series.Security);
+                        //        if (allTrades != null && allTrades.Count != 0)
+                        //        {
+                        //            series.PreLoad(allTrades);
+                        //        }
+                        //    }
+                        //    else
+                        //    {
+                        //        List<Candle> candles = luaServ.GetQuikLuaCandleHistory(series.Security,
+                        //            series.TimeFrameSpan);
+                        //        if (candles != null)
+                        //        {
+                        //            //candles.Reverse();
+                        //            series.CandlesAll = candles;
+                        //        }
+                        //    }
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
+                        //else if (serverType == ServerType.BitMex)
+                        //{
+                        //    BitMexServer bitMex = (BitMexServer)_server;
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple || 
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //        series.PreLoad(allTrades);
+                        //    }
+                        //    else
+                        //    {
+                        //        List<Candle> candles = bitMex.GetBitMexCandleHistory(series.Security.Name,
+                        //            series.TimeFrameSpan);
+                        //        if (candles != null)
+                        //        {
+                        //            series.CandlesAll = candles;
+                        //        }
+                        //    }
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
+                        //else if (serverType == ServerType.Kraken)
+                        //{
+                        //    KrakenServer kraken = (KrakenServer)_server;
 
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
-                                series.PreLoad(allTrades);
-                            }
-                            else
-                            {
-                                List<Candle> candles = kraken.GetCandleHistory(series.Security.Name,
-                                    series.TimeFrameSpan);
-                                if (candles != null)
-                                {
-                                    series.CandlesAll = candles;
-                                }
-                            }
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //        series.PreLoad(allTrades);
+                        //    }
+                        //    else
+                        //    {
+                        //        List<Candle> candles = kraken.GetCandleHistory(series.Security.Name,
+                        //            series.TimeFrameSpan);
+                        //        if (candles != null)
+                        //        {
+                        //            series.CandlesAll = candles;
+                        //        }
+                        //    }
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
                         else if (serverType == ServerType.Binance)
                         {
                             BinanceServer binance = (BinanceServer)_server;
@@ -504,27 +489,27 @@ namespace OsEngine.Entity
                             series.UpdateAllCandles();
                             series.IsStarted = true;
                         }
-                        else if (serverType == ServerType.InteractiveBrokers)
-                        {
-                            InteractiveBrokersServer server = (InteractiveBrokersServer)_server;
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
-                                series.PreLoad(allTrades);
-                            }
-                            else
-                            {
-                                List<Candle> candles = server.GetCandleHistory(series.Security.Name,
-                                    series.TimeFrame);
-                                if (candles != null)
-                                {
-                                    series.CandlesAll = candles;
-                                }
-                            }
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
+                        //else if (serverType == ServerType.InteractiveBrokers)
+                        //{
+                        //    InteractiveBrokersServer server = (InteractiveBrokersServer)_server;
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //        series.PreLoad(allTrades);
+                        //    }
+                        //    else
+                        //    {
+                        //        List<Candle> candles = server.GetCandleHistory(series.Security.Name,
+                        //            series.TimeFrame);
+                        //        if (candles != null)
+                        //        {
+                        //            series.CandlesAll = candles;
+                        //        }
+                        //    }
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
                         else if (serverType == ServerType.BinanceFutures)
                         {
 
@@ -547,102 +532,102 @@ namespace OsEngine.Entity
                             series.UpdateAllCandles();
                             series.IsStarted = true;
                         }
-                        else if (serverType == ServerType.AscendEx_BitMax)
-                        {
-                            BitMaxProServer bitMax = (BitMaxProServer)_server;
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
-                                series.PreLoad(allTrades);
-                            }
-                            else
-                            {
-                                List<Candle> candles = bitMax.GetCandleHistory(series.Security.Name,
-                                    series.TimeFrameSpan);
-                                if (candles != null)
-                                {
-                                    series.CandlesAll = candles;
-                                }
-                            }
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
-                        else if (serverType == ServerType.Bitfinex)
-                        {
-                            BitfinexServer bitfinex = (BitfinexServer)_server;
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple || 
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
-                                series.PreLoad(allTrades);
-                            }
-                            else
-                            {
-                                List<Candle> candles = bitfinex.GetCandleHistory(series.Security.Name,
-                                    series.TimeFrameSpan);
-                                if (candles != null)
-                                {
-                                    series.CandlesAll = candles;
-                                }
-                            }
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
-                        else if (serverType == ServerType.Transaq)
-                        {
-                            TransaqServer transaq = (TransaqServer)_server;
+                        //else if (serverType == ServerType.AscendEx_BitMax)
+                        //{
+                        //    BitMaxProServer bitMax = (BitMaxProServer)_server;
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //        series.PreLoad(allTrades);
+                        //    }
+                        //    else
+                        //    {
+                        //        List<Candle> candles = bitMax.GetCandleHistory(series.Security.Name,
+                        //            series.TimeFrameSpan);
+                        //        if (candles != null)
+                        //        {
+                        //            series.CandlesAll = candles;
+                        //        }
+                        //    }
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
+                        //else if (serverType == ServerType.Bitfinex)
+                        //{
+                        //    BitfinexServer bitfinex = (BitfinexServer)_server;
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple || 
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //        series.PreLoad(allTrades);
+                        //    }
+                        //    else
+                        //    {
+                        //        List<Candle> candles = bitfinex.GetCandleHistory(series.Security.Name,
+                        //            series.TimeFrameSpan);
+                        //        if (candles != null)
+                        //        {
+                        //            series.CandlesAll = candles;
+                        //        }
+                        //    }
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
+                        //else if (serverType == ServerType.Transaq)
+                        //{
+                        //    TransaqServer transaq = (TransaqServer)_server;
 
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
 
-                                if (allTrades is null)
-                                {
-                                    _server.GetTickDataToSecurity(series.Security.Name, series.Security.NameClass, DateTime.MinValue, DateTime.Now, DateTime.Now, false);
-                                    allTrades = _server.GetAllTradesToSecurity(series.Security);
-                                }
+                        //        if (allTrades is null)
+                        //        {
+                        //            _server.GetTickDataToSecurity(series.Security.Name, series.Security.NameClass, DateTime.MinValue, DateTime.Now, DateTime.Now, false);
+                        //            allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //        }
 
-                                series.PreLoad(allTrades);
-                                series.UpdateAllCandles();
-                                series.IsStarted = true;
-                            }
-                            else
-                            {
-                                transaq.GetCandleHistory(series);
-                            }
-                        }
-                        else if (serverType == ServerType.Exmo)
-                        {
-                            List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //        series.PreLoad(allTrades);
+                        //        series.UpdateAllCandles();
+                        //        series.IsStarted = true;
+                        //    }
+                        //    else
+                        //    {
+                        //        transaq.GetCandleHistory(series);
+                        //    }
+                        //}
+                        //else if (serverType == ServerType.Exmo)
+                        //{
+                        //    List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
 
-                            series.PreLoad(allTrades);
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
-                        else if (serverType == ServerType.Zb)
-                        {
-                            ZbServer zbServer = (ZbServer)_server;
+                        //    series.PreLoad(allTrades);
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
+                        //else if (serverType == ServerType.Zb)
+                        //{
+                        //    ZbServer zbServer = (ZbServer)_server;
 
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
-                                series.PreLoad(allTrades);
-                            }
-                            else
-                            {
-                                List<Candle> candles = zbServer.GetCandleHistory(series.Security.Name, series.TimeFrameSpan);
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //        series.PreLoad(allTrades);
+                        //    }
+                        //    else
+                        //    {
+                        //        List<Candle> candles = zbServer.GetCandleHistory(series.Security.Name, series.TimeFrameSpan);
 
-                                if (candles != null)
-                                {
-                                    series.CandlesAll = candles;
-                                }
-                            }
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
+                        //        if (candles != null)
+                        //        {
+                        //            series.CandlesAll = candles;
+                        //        }
+                        //    }
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
                         else if (serverType == ServerType.GateIo)
                         {
                             GateIoServer gateIoServer = (GateIoServer)_server;
@@ -686,90 +671,90 @@ namespace OsEngine.Entity
                             series.UpdateAllCandles();
                             series.IsStarted = true;
                         }
-                        else if (serverType == ServerType.Hitbtc)
-                        {
-                            HitbtcServer hitbtc = (HitbtcServer)_server;
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
-                                series.PreLoad(allTrades);
-                            }
-                            else
-                            {
-                                List<Candle> candles = hitbtc.GetCandleHistory(series.Security.Name,
-                                    series.TimeFrameSpan);
-                                if (candles != null)
-                                {
-                                    series.CandlesAll = candles;
-                                }
-                            }
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
-                        else if (serverType == ServerType.HuobiSpot)
-                        {
-                            HuobiSpotServer huobiSpot = (HuobiSpotServer)_server;
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
-                                series.PreLoad(allTrades);
-                            }
-                            else
-                            {
-                                List<Candle> candles = huobiSpot.GetCandleHistory(series.Security.Name,
-                                    series.TimeFrameSpan);
-                                if (candles != null)
-                                {
-                                    series.CandlesAll = candles;
-                                }
-                            }
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
-                        else if (serverType == ServerType.HuobiFutures)
-                        {
-                            HuobiFuturesServer huobi = (HuobiFuturesServer)_server;
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
-                                series.PreLoad(allTrades);
-                            }
-                            else
-                            {
-                                List<Candle> candles = huobi.GetCandleHistory(series.Security.Name,
-                                    series.TimeFrameSpan);
-                                if (candles != null)
-                                {
-                                    series.CandlesAll = candles;
-                                }
-                            }
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
-                        else if (serverType == ServerType.HuobiFuturesSwap)
-                        {
-                            HuobiFuturesSwapServer huobi = (HuobiFuturesSwapServer)_server;
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
-                                series.PreLoad(allTrades);
-                            }
-                            else
-                            {
-                                List<Candle> candles = huobi.GetCandleHistory(series.Security.Name,
-                                    series.TimeFrameSpan);
-                                if (candles != null)
-                                {
-                                    series.CandlesAll = candles;
-                                }
-                            }
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
+                        //else if (serverType == ServerType.Hitbtc)
+                        //{
+                        //    HitbtcServer hitbtc = (HitbtcServer)_server;
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //        series.PreLoad(allTrades);
+                        //    }
+                        //    else
+                        //    {
+                        //        List<Candle> candles = hitbtc.GetCandleHistory(series.Security.Name,
+                        //            series.TimeFrameSpan);
+                        //        if (candles != null)
+                        //        {
+                        //            series.CandlesAll = candles;
+                        //        }
+                        //    }
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
+                        //else if (serverType == ServerType.HuobiSpot)
+                        //{
+                        //    HuobiSpotServer huobiSpot = (HuobiSpotServer)_server;
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //        series.PreLoad(allTrades);
+                        //    }
+                        //    else
+                        //    {
+                        //        List<Candle> candles = huobiSpot.GetCandleHistory(series.Security.Name,
+                        //            series.TimeFrameSpan);
+                        //        if (candles != null)
+                        //        {
+                        //            series.CandlesAll = candles;
+                        //        }
+                        //    }
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
+                        //else if (serverType == ServerType.HuobiFutures)
+                        //{
+                        //    HuobiFuturesServer huobi = (HuobiFuturesServer)_server;
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //        series.PreLoad(allTrades);
+                        //    }
+                        //    else
+                        //    {
+                        //        List<Candle> candles = huobi.GetCandleHistory(series.Security.Name,
+                        //            series.TimeFrameSpan);
+                        //        if (candles != null)
+                        //        {
+                        //            series.CandlesAll = candles;
+                        //        }
+                        //    }
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
+                        //else if (serverType == ServerType.HuobiFuturesSwap)
+                        //{
+                        //    HuobiFuturesSwapServer huobi = (HuobiFuturesSwapServer)_server;
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //        series.PreLoad(allTrades);
+                        //    }
+                        //    else
+                        //    {
+                        //        List<Candle> candles = huobi.GetCandleHistory(series.Security.Name,
+                        //            series.TimeFrameSpan);
+                        //        if (candles != null)
+                        //        {
+                        //            series.CandlesAll = candles;
+                        //        }
+                        //    }
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
 
                         else if (serverType == ServerType.Bybit)
                         {
@@ -881,27 +866,27 @@ namespace OsEngine.Entity
                             series.UpdateAllCandles();
                             series.IsStarted = true;
                         }
-                        else if (serverType == ServerType.Bitmax_AscendexFutures)
-                        {
-                            if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
-                                series.TimeFrameSpan.TotalMinutes < 1)
-                            {
-                                List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
-                                series.PreLoad(allTrades);
-                            }
-                            else
-                            {
-                                BitMaxFuturesServer okx = (BitMaxFuturesServer)_server;
-                                List<Candle> candles = okx.GetCandleHistory(series.Security.Name,
-                                    series.TimeFrameSpan);
-                                if (candles != null)
-                                {
-                                    series.CandlesAll = candles;
-                                }
-                            }
-                            series.UpdateAllCandles();
-                            series.IsStarted = true;
-                        }
+                        //else if (serverType == ServerType.Bitmax_AscendexFutures)
+                        //{
+                        //    if (series.CandleCreateMethodType != CandleCreateMethodType.Simple ||
+                        //        series.TimeFrameSpan.TotalMinutes < 1)
+                        //    {
+                        //        List<Trade> allTrades = _server.GetAllTradesToSecurity(series.Security);
+                        //        series.PreLoad(allTrades);
+                        //    }
+                        //    else
+                        //    {
+                        //        BitMaxFuturesServer okx = (BitMaxFuturesServer)_server;
+                        //        List<Candle> candles = okx.GetCandleHistory(series.Security.Name,
+                        //            series.TimeFrameSpan);
+                        //        if (candles != null)
+                        //        {
+                        //            series.CandlesAll = candles;
+                        //        }
+                        //    }
+                        //    series.UpdateAllCandles();
+                        //    series.IsStarted = true;
+                        //}
 
 
                         if (series.CandleMarketDataType == CandleMarketDataType.MarketDepth)
